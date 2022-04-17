@@ -120,7 +120,7 @@ If a user chooses `PUT` within `LIST`, the user can determine a file to send for
 Here I show some ways to test the file system for reliability when one server is down. 
 On the left are the three servers up (DFS1, DFS2, DFS3) and on the right the client (DFC).
 
-![image: PythonDFSdemo](./images/PythonDFSdemo.gif) 
+
 
 
 ## Problems Fixed

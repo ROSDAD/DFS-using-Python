@@ -363,8 +363,10 @@ def get_filename():
 			try:
 				statinfo = os.stat(filename + '.txt')
 			except FileNotFoundError:
-				print('There is no such file in the directory.\nExiting now...')
-				sys.exit()
+				# print('There is no such file in the directory.\nExiting now...')
+				print('There is no such file in the directory.')
+				return 0
+				# sys.exit()
 	
 	global filename_statinfo
 	filename_statinfo = (filename, statinfo)
@@ -555,9 +557,9 @@ def client():
 		os.remove(str(dfs1[1]))
 		os.remove(str(dfs3[0]))
 		os.remove(str(dfs3[1]))
-		
-		print('\nExiting now...')
-		sys.exit()
+		return 0
+		# print('\nExiting now...')
+		# sys.exit()
 			
 	# LIST
 	elif command.lower() == 'list':
@@ -673,9 +675,9 @@ def client():
 			os.remove(str(dfs1[1]))
 			os.remove(str(dfs3[0]))
 			os.remove(str(dfs3[1]))
-			
-			print('\nExiting now...')
-			sys.exit()
+			return 0
+			# print('\nExiting now...')
+			# sys.exit()
 
 			
 		# GET (within LIST)			
@@ -722,7 +724,8 @@ def client():
 				else:
 					try:
 						print(answer)
-						sys.exit()
+						return 0
+						# sys.exit()
 					except OSError:
 						pass			
 								
@@ -828,9 +831,9 @@ def client():
 						except IndexError:
 							pass
 						
-					print('Exiting now...')
-					sys.exit()
-					
+					# print('Exiting now...')
+					# sys.exit()
+					return 0
 				else:
 
 					FIN = 'Transfer failed.\nExiting now...'
@@ -841,7 +844,8 @@ def client():
 							pass
 							
 					print(FIN)
-					sys.exit()
+					# sys.exit()
+					return 0
 				
 			# else if there are 4 chunks	
 			else:
@@ -887,9 +891,9 @@ def client():
 							os.remove(str(username +'\\' +chunk_list[i]))
 						except IndexError:
 							pass
-						
-					print('Exiting now...')
-					sys.exit()
+					return 0	
+					# print('Exiting now...')
+					# sys.exit()
 					
 				else:
 					# if the ordered list is not [1,2,3,4]
@@ -901,8 +905,8 @@ def client():
 							pass
 							
 					print(FIN)
-					sys.exit()
-					
+					# sys.exit()
+					return 0
 		# end of GET (within LIST) --------------------------------
 			
 		elif answer.lower() == 'exit':
@@ -966,7 +970,8 @@ def client():
 			else:
 				try:
 					print(answer)
-					sys.exit()
+					# sys.exit()
+					return 0
 				except OSError:
 					pass			
 							
@@ -1072,8 +1077,9 @@ def client():
 					except IndexError:
 						pass
 					
-				print('Exiting now...')
-				sys.exit()
+				# print('Exiting now...')
+				# sys.exit()
+				return 0
 				
 			else:
 
@@ -1085,8 +1091,9 @@ def client():
 						pass
 							
 				print(FIN)
-				sys.exit()
-			
+				# sys.exit()
+				return 0
+
 		# else if there are 4 chunks	
 		else:
 			# which might contain repeated chunks
@@ -1133,11 +1140,13 @@ def client():
 						pass
 					
 				print('Exiting now...')
-				sys.exit()
+				# sys.exit()
+				return 0
 				
 			else:
 				# if the ordered list is not [1,2,3,4]
-				FIN = 'Transfer failed.\Exiting now...'
+				# FIN = 'Transfer failed.\Exiting now...'
+				FIN = 'Transfer failed.'
 				for i in range(0,4):
 					try:
 						conns[i].send(FIN.encode())
@@ -1145,7 +1154,8 @@ def client():
 						pass
 						
 				print(FIN)
-				sys.exit()			
+				# sys.exit()	
+				return 0		
 							
 			
 # run client

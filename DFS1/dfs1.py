@@ -134,8 +134,10 @@ def put(new_dir_path):
 		buffersize = int(conn.recv(2048).decode())
 		print('The buffer size is: ' +str(buffersize))
 	except ValueError:
-		print('The buffer size is not a number. \nExiting now...')
-		sys.exit()
+		# print('The buffer size is not a number. \nExiting now...')
+		print('The buffer size is not a number.')
+		# sys.exit()
+		return 0
 		
 	# receive chunk 1 name and data 
 	name1 = conn.recv(1024).decode()
@@ -194,8 +196,9 @@ def put(new_dir_path):
 		conn.send(response.encode())						
 	
 	# close connection after chunks are sent 
-	print('Exiting now...')
-	sys.exit()
+	# print('Exiting now...')
+	return 0
+	# sys.exit()
 
 
 # creates new directory for user
@@ -277,10 +280,13 @@ def get(username):
 
 	# if user directory is empty		
 	if user_dir_filelist == []:
-		response='Your directory has no files yet.\nExiting now...'
-		print('User directory has no file folders.\nExiting now...')
+		# response='Your directory has no files yet.\nExiting now...'
+		response='Your directory has no files yet.'
+		# print('User directory has no file folders.\nExiting now...')
+		print('User directory has no file folders.')
 		conn.send(response.encode())
-		sys.exit()
+		return 0
+		# sys.exit()
 		
 	# else, if user dir is not empty 
 	else:
@@ -289,10 +295,13 @@ def get(username):
 		file_dir_chunklist = next(os.walk(file_dir))[2]
 
 		if file_dir_chunklist == []:
-			response='You do not have any files in the folder yet.\nExiting now...'
-			print('File folder empty.\nExiting now...')
+			# response='You do not have any files in the folder yet.\nExiting now...'
+			response='You do not have any files in the folder yet.'
+			# print('File folder empty.\nExiting now...')
+			print('File folder empty.')
 			conn.send(response.encode())
-			sys.exit()
+			return 0
+			# sys.exit()
 		
 		# if there are any file chunks...
 		else:
@@ -320,10 +329,12 @@ def get(username):
 						pass
 					# otherwise, exit 
 					else:
-						response='No such file exists.\nExiting now...'
+						# response='No such file exists.\nExiting now...'
+						response='No such file exists.'
 						print(response)
 						conn.send(response.encode())
-						sys.exit()
+						return 0
+						# sys.exit()
 						
 	# establish chunk paths
 	name1, name2 = os.listdir(file_dir)
@@ -388,9 +399,10 @@ def get(username):
 	else: 
 		
 		# print and exit 
-		print(FINACK +'\nExiting now...')
-		
-	sys.exit()
+		# print(FINACK +'\nExiting now...')
+		print(FINACK)
+	return 0
+	# sys.exit()
 
 	
 # RUN DFS -------------------------------------------------	
@@ -451,9 +463,9 @@ while True:
 			get(username)
 			
 		# exit 
-		else:
-			print('Exiting now...')
-			sys.exit()	
+		# else:
+		# 	print('Exiting now...')
+		# 	sys.exit()	
 			
 	# GET
 	elif command == 'get':
@@ -461,7 +473,9 @@ while True:
 					
 	# handle wrong command  
 	else:
-		print('Command does not exist.\nExiting now...')
-		sys.exit()	
+		# print('Command does not exist.\nExiting now...')
+		print('Command does not exist.')
+		
+		# sys.exit()	
 
 conn.close()
