@@ -395,7 +395,7 @@ def get(username):
 	
 # RUN DFS -------------------------------------------------	
 
-server_name = '127.0.0.1'
+server_name = socket.gethostbyname(socket.gethostname())
 server_port = int(sys.argv[1])
 	
 # define socket
